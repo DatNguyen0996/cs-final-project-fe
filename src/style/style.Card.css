@@ -1,0 +1,84 @@
+.card {
+  height: 100%;
+  aspect-ratio: 2/3;
+  padding: 5px;
+  transform: translateX(00%);
+  transition: all 1s ease-in-out;
+  cursor: pointer;
+}
+
+.card .img-box {
+  width: 100%;
+  height: 100%;
+  background-color: #e95220;
+  padding: 5px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.card .img-box .saleOff {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  /* background-color: #ff0e0e; */
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 5px;
+  right: 5px;
+  padding: 0;
+}
+
+.card .img-box .saleOff i {
+  position: absolute;
+  background-color: #f44336;
+  width: 35px;
+  text-align: center;
+  top: 13px;
+}
+
+.card .img-box .priceSale {
+  position: absolute;
+  background-color: #f44336;
+  width: 80px;
+  border-radius: 5px;
+  right: 5px;
+  top: 55px;
+  color: #fff;
+  text-align: center;
+}
+
+.card .img-box img {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 5px;
+}
+
+.card .img-box .infor {
+  color: #fff;
+  width: 100%;
+  border-radius: 5px;
+  margin-top: 5px;
+  padding: 5px;
+  background-color: #282a36;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.card .img-box .infor .name {
+  font-size: 100%;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  /* background-color: #e95220; */
+  height: 45px;
+}
+
+.card .img-box .infor .price {
+  color: yellow;
+}

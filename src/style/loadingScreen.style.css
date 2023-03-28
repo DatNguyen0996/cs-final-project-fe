@@ -1,0 +1,33 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+.loading-screen-container {
+  height: 100%;
+  max-height: 100px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+}
+.loading-screen-spin {
+  height: 100%;
+  max-height: 100px;
+  aspect-ratio: 1;
+  border: 5px solid #ede7f6;
+  border-top: 5px solid #e95220;
+  border-radius: 50%;
+  animation: loader-2-spin 2s linear infinite;
+}
+
+@keyframes loader-2-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

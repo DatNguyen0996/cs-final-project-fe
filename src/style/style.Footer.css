@@ -1,0 +1,41 @@
+#footer-container {
+  width: 100%;
+  background-color: #222222;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  color: #ffff;
+}
+
+#footer-container .box {
+  height: 100%;
+  max-width: 400px;
+  line-height: 1.6;
+  padding: 0 10px 10px 10px;
+}
+
+#footer-container .box p {
+  padding-left: 20px;
+}
+
+#footer-container .box span {
+  color: #e95220;
+  font-weight: bolder;
+  text-decoration: underline;
+}
+
+#footer-container .box button {
+  margin-left: 20px;
+  border: none;
+  color: #e95220;
+  font-weight: bolder;
+  font-size: 1rem;
+  cursor: pointer;
+  background: none;
+  border-bottom: #e95220 1px solid;
+  border-radius: 5px;
+}
+#footer-container .box button:hover {
+  color: #fa7245;
+}

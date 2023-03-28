@@ -1,0 +1,28 @@
+#mail-container {
+  width: 100%;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+#mail-container .mail {
+  width: 100%;
+  max-width: 800px;
+}
+
+#mail-container .mail p {
+  margin-left: 10px;
+}
+
+#mail-container .mail .content {
+  width: 100%;
+  min-height: 100px;
+  border: 1px solid #222;
+  margin: 10px 0 20px 0;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+#mail-container .loadingScreen {
+  height: 200px;
+}

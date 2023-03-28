@@ -1,0 +1,395 @@
+#accountPage-container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  padding: 0 10px;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+#accountPage-container .user-infor {
+  min-width: 200px;
+  max-width: 350px;
+  flex-grow: 1;
+  overflow: hidden;
+  height: fit-content;
+  margin-bottom: 30px;
+}
+
+#accountPage-container .user-infor h3 {
+  margin: 0 0 20px 0;
+}
+
+#accountPage-container .user-infor .wellcome b {
+  color: #e95220;
+}
+
+#accountPage-container .user-infor .infor {
+  margin: 20px 0 10px 0;
+}
+
+#accountPage-container .user-infor .field img {
+  width: 20px;
+  margin: 0 5px;
+}
+#accountPage-container .user-infor .field b {
+  margin: 0 5px;
+}
+
+#accountPage-container .user-infor .field {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 5px 0;
+}
+
+#accountPage-container .user-infor .btn {
+  padding: 10px 10px 10px 0;
+  width: 100%;
+}
+
+#accountPage-container .user-infor .btn button {
+  width: 100%;
+  height: 40px;
+  background-color: #e95220;
+  border: 1px solid #e95220;
+  font-size: 1.1rem;
+  color: #ffff;
+  cursor: pointer;
+}
+
+#accountPage-container .user-infor .btn button:hover {
+  color: #e95220;
+  background-color: #ffff;
+}
+
+#accountPage-container .user-order {
+  flex-grow: 3;
+  min-width: 200px;
+  overflow: hidden;
+  color: rgb(62, 62, 62);
+}
+
+#accountPage-container .user-order h3 {
+  margin: 0;
+}
+
+#accountPage-container .order-box {
+  width: 100%;
+  max-height: 700px;
+  overflow: auto;
+}
+
+#accountPage-container .order-wrapper {
+  width: 100%;
+  margin-top: 20px;
+}
+
+#accountPage-container .order-wrapper .main {
+  background-color: rgb(255, 247, 234);
+  padding: 0 10px;
+  border-radius: 0 0 10px 10px;
+  cursor: pointer;
+}
+
+#accountPage-container .order-wrapper .header {
+  padding: 10px 0;
+}
+
+#accountPage-container .order-wrapper .body {
+  border-top: 1px solid #2222;
+  padding: 10px 0;
+  display: flex;
+  font-size: 1rem;
+}
+#accountPage-container .order-wrapper .body .item-infor {
+  flex-grow: 1;
+}
+
+#accountPage-container .order-wrapper .body .field {
+  margin: 5px 0;
+}
+
+#accountPage-container .order-wrapper .body .price-quantity {
+  display: flex;
+  justify-content: space-between;
+}
+
+#accountPage-container .order-wrapper .body .price-quantity .one {
+  margin-right: 5px;
+}
+
+#accountPage-container .order-wrapper .body .price-quantity .two {
+  margin-left: 5px;
+}
+
+#accountPage-container .order-wrapper .body b {
+  color: #e95220;
+}
+
+#accountPage-container .order-wrapper .body img {
+  height: 90px;
+  margin-right: 10px;
+}
+
+#accountPage-container .order-wrapper .footer {
+  padding: 10px;
+  background-color: antiquewhite;
+  border-radius: 10px 10px 0 0;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#accountPage-container .order-wrapper .footer b {
+  color: #e95220;
+}
+
+#accountPage-container .order-wrapper .footer img {
+  height: 50px;
+}
+
+#managerarea {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#edit-container,
+#order-detail {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: #222222e3;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#order-detail .order-wrapper {
+  width: 100%;
+  max-width: 450px;
+  background-color: #ffff;
+  border-radius: 20px;
+  padding: 50px 5px;
+  position: relative;
+}
+
+#order-detail .order-wrapper .close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+#order-detail .order-box {
+  width: 100%;
+  height: 100%;
+  border: 2px solid #000000;
+  padding: 0;
+}
+#order-detail .order-box .header {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  border-bottom: 1px #000000 dashed;
+}
+#order-detail .order-box .header .image {
+  height: 100px;
+  width: 100px;
+  padding: 10px;
+}
+
+#order-detail .order-box .header .image img {
+  height: 100%;
+  width: 100%;
+  display: block;
+}
+
+#order-detail .order-box .header .infor {
+  margin: 0;
+  padding: 0;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#order-detail .order-box .header h1 {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+#order-detail .order-box .address {
+  display: flex;
+  flex-wrap: wrap;
+}
+#order-detail .order-box .address .to,
+#order-detail .order-box .address .from {
+  flex-grow: 1;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  border: 1px #000000 dashed;
+}
+
+#order-detail .order-box .order-infomation {
+  border: 1px #000000 dashed;
+  min-height: 150px;
+  padding: 10px 5px;
+}
+
+#order-detail .order-box .price {
+  border: 1px #000000 dashed;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+}
+#order-detail .order-box .price div {
+  flex-grow: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+
+#order-detail .order-status {
+  border: 1px #000000 dashed;
+  padding: 10px 5px;
+}
+
+#edit-container .edit-wrapper {
+  height: fit-content;
+  width: 100%;
+  max-width: 600px;
+  padding: 20px 10px;
+}
+#edit-container .edit-box {
+  width: 100%;
+  background-color: #ffff;
+  overflow: hidden;
+  border-radius: 10px;
+}
+#edit-container .edit-box .header {
+  background-color: #e95220;
+
+  color: #ffff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+#edit-container .edit-box form {
+  width: 100%;
+}
+#edit-container .edit-box .body {
+  width: 100%;
+  padding: 20px 10px;
+}
+
+#edit-container .edit-box .body .field {
+  width: 100%;
+  display: flex;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  padding: 10px 0;
+}
+
+#edit-container .edit-box .body .field label {
+  width: 150px;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+#edit-container .edit-box .body .field input {
+  flex-grow: 1;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  border: 1px solid #22222286;
+  padding: 10px 20px;
+}
+
+#edit-container .edit-box .body .radio .select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
+  padding: 10px 20px;
+}
+
+#edit-container .edit-box .error {
+  font-size: 1.2rem;
+  color: #ff1010;
+  text-align: center;
+}
+
+#edit-container .edit-box .btn {
+  padding: 10px;
+}
+
+#edit-container .edit-box .btn button {
+  width: 100%;
+  height: 60px;
+  font-size: 1.2rem;
+  color: #ffff;
+  background-color: #e95220;
+  border: #e95220 solid 1px;
+  cursor: pointer;
+}
+#edit-container .edit-box .btn button:hover {
+  background-color: #ffff;
+  color: #e95220;
+}
+
+#main-page-container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+}
+
+#main-page-container .main-page-header {
+  background-color: #e95220;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+#main-page-container .main-page-header button {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #e95220;
+  cursor: pointer;
+}
+
+#main-page-container .main-page-header button:hover {
+  color: #e95220;
+  background-color: #ffff;
+}
+
+#button-selected {
+  color: #e95220;
+  background-color: #ffff;
+}
+
+#button-not-selected {
+  background-color: #e95220;
+  color: #ffff;
+}

@@ -1,0 +1,9 @@
+#listOfStore-container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

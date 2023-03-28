@@ -1,0 +1,77 @@
+.manager-container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 10px;
+}
+.manager-container .edit-popup {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #222222af;
+  top: 0px;
+  left: 0px;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#delete-popup {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #222222af;
+  top: 0px;
+  left: 0px;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#delete-popup .wrapper {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 20px;
+}
+
+#delete-popup .wrapper p {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin: 50px 0 20px 0;
+  color: #34e175;
+}
+
+#delete-popup .wrapper .btn {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20px 0 50px 0;
+}
+#delete-popup .wrapper .btn button {
+  height: 50px;
+  width: 150px;
+  font-size: 1.3rem;
+  border-radius: 10px;
+  border: none;
+  color: #ffff;
+  cursor: pointer;
+}
+#delete-popup .wrapper .btn button:hover {
+  filter: brightness(120%);
+}
+
+#delete-popup .wrapper .btn .confirm {
+  background-color: #fe5e78;
+}
+
+#delete-popup .wrapper .btn .cancel {
+  background-color: #34e175;
+}

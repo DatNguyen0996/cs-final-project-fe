@@ -1,0 +1,277 @@
+.form-container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 10px;
+  z-index: 20;
+}
+
+.form-container .field {
+  margin-bottom: 10px;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #eaeaea;
+  position: relative;
+
+  transition: all 1s ease-in-out;
+}
+
+.form-container .field .title-wrapper {
+  width: 100%;
+  background-color: rgb(225, 241, 255);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.form-container .field .title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+
+.form-container .field .title p {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.form-container .field .title select {
+  margin-left: 10px;
+  border: none;
+  height: 30px;
+  padding: 0 5px;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #e95220;
+  cursor: pointer;
+}
+
+.form-container .field .title select option {
+  background-color: rgb(238, 238, 238);
+  color: #000;
+  cursor: pointer;
+}
+
+.form-container .field .title select:focus {
+  outline: none;
+}
+
+.form-container .field .body {
+  width: 100%;
+  padding: 0 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.form-container .field .body .wrapper {
+  border: #000 1px solid;
+  margin: 30px 0;
+  padding: 30px 5px 10px 5px;
+  border-radius: 10px;
+  position: relative;
+  background-color: #ffffff;
+}
+
+.form-container .field .body .wrapper p {
+  position: absolute;
+  background-color: #e95220;
+  color: #fff;
+  height: 30px;
+  width: fit-content;
+  padding: 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  top: -15px;
+  left: 20px;
+  z-index: 2;
+}
+
+.form-container .field .body .wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.form-container .field .body .wrapper .box-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  /* padding: 0 0px; */
+  width: 100%;
+}
+
+.form-container .field .body .wrapper .description-wrapper {
+  width: 100%;
+}
+
+.form-container .field .body .wrapper .field-wrapper {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  padding: 10px;
+}
+.form-container .field .body .wrapper .field-wrapper label {
+  display: block;
+  width: 120px;
+}
+
+@media (max-width: 550px) {
+  .form-container .field .body .wrapper .field-wrapper {
+    flex-direction: column;
+  }
+  .form-container .field .body .wrapper .field-wrapper label {
+    display: block;
+    width: 100%;
+  }
+}
+
+.form-container .field .body .wrapper .field-wrapper textarea,
+.form-container .field .body .wrapper .field-wrapper input,
+.form-container .field .body .wrapper .field-wrapper select {
+  height: 30px;
+  padding-left: 5px;
+  border-radius: 5px;
+  border: #616161 1px solid;
+  min-width: 200px;
+  flex-grow: 1;
+  font-size: 1rem;
+}
+
+.form-container .field .body .wrapper .field-wrapper textarea {
+  height: 100px;
+  font-size: 1rem;
+}
+
+.form-container .field .body .wrapper .field-wrapper input:focus {
+  outline: none;
+  background-color: #c8c8c8;
+  color: #000000;
+}
+.form-container .field .body .wrapper .field-wrapper select:focus {
+  outline: none;
+}
+
+.form-container .field .body .wrapper .field-wrapper select:hover {
+  cursor: pointer;
+}
+
+.form-container .field .btn {
+  padding: 0;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container .field .btn button {
+  background-color: #255ef6;
+  padding: 10px 50px;
+  border: none;
+  color: #fff;
+  font-size: 1.1rem;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.form-container .field .btn button:hover {
+  filter: brightness(120%);
+}
+
+.form-container .field .body .wrapper .disable {
+  background-color: #aaaaaac2;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  border-radius: 10px;
+}
+
+#inputImage {
+  padding: 5px;
+  height: fit-content;
+}
+
+.form-container .field .body .wrapper-new .field-wrapper-new {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  padding: 10px;
+  border-radius: 10px;
+  height: 30px;
+  background-color: #282a36;
+  box-shadow: 3px 3px 3px #e95220;
+  color: #fff;
+}
+
+.form-container .field .body .table {
+  width: 100%;
+  background-color: #ffffff;
+  margin: 10px 0;
+  overflow: hidden;
+  overflow-x: auto;
+  border-radius: 10px;
+}
+
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td,
+#customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  min-width: 150px;
+}
+
+#customers td .edit {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+#customers td .edit button {
+  border: none;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+#customers td .edit img {
+  width: 35px;
+}
+#customers td .edit button:hover {
+  background-color: #b2b2b2;
+}
+
+#customers tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#customers tr:hover {
+  background-color: #ddd;
+}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #e95220;
+  color: white;
+}
