@@ -53,11 +53,13 @@ function StoreForm({
   }
 
   useEffect(() => {
-    setValue(`name`, store.name);
-    setValue(`phone`, store.phone);
-    setValue(`administrator`, administrator);
-    setValue(`address`, store.address);
-  }, []);
+    if (formType !== "create") {
+      setValue(`name`, store.name);
+      setValue(`phone`, store.phone);
+      setValue(`administrator`, administrator);
+      setValue(`address`, store.address);
+    }
+  }, [setValue, store, administrator, formType]);
 
   // console.log(store);
 
