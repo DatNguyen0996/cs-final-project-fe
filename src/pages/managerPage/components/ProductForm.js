@@ -77,6 +77,9 @@ function ProductForm({
       setValue(`weight`, product.weight);
       setValue(`size`, product.size);
       setValue(`saleOff`, product.saleOff || 0);
+    } else {
+      setValue(`price`, product.price || 0);
+      setValue(`saleOff`, product.saleOff || 0);
     }
   }, [product, setValue, formType]);
 

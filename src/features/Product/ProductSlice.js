@@ -78,6 +78,7 @@ export const createProduct = (data) => async (dispatch) => {
     toast.success("Tạo sản phẩm thành công");
   } catch (error) {
     dispatch(slice.actions.hasError(error.message));
+    toast.error(error.message);
   }
 };
 
