@@ -59,15 +59,6 @@ function Router() {
 
         <Route path="listOfStore" element={<ListOfStore />} />
 
-        {/* <Route
-          path="profile/:userId"
-          element={
-            <AuthRequire>
-              <UserDetailPage />
-            </AuthRequire>
-          }
-        /> */}
-
         <Route
           path="cart"
           element={

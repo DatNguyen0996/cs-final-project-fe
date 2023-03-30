@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../../../hooks/userAuth";
+import { useLocation, Link } from "react-router-dom";
 
 import { getAllProductStore } from "../../../features/ProductsOfStore/ProductsOfStoreSlice";
 import { createCart } from "../../../features/Cart/CartSlice";
@@ -29,9 +31,13 @@ function RenderInfor({ productId, userId }) {
 
   if (allProductStore.countProductOfOneStore === undefined) {
     checkWeight = 0;
+  } else if (allProductStore.countProductOfOneStore === 0) {
+    checkWeight = -1;
   } else {
     checkWeight = allProductStore.countProductOfOneStore;
   }
+
+  console.log(checkWeight);
 
   const { isLoading: addCart } = useSelector((state) => state.cart);
   const { stores } = useSelector((state) => state.store);
@@ -63,6 +69,9 @@ function RenderInfor({ productId, userId }) {
       })
     );
   }, [dispatch, storeId, singleProduct]);
+
+  const { isAuthenticated, isInitialized } = useAuth();
+  const location = useLocation();
 
   const handleAddToCart = () => {
     if (quantity === 0 && isSelected === undefined) {
@@ -158,9 +167,12 @@ function RenderInfor({ productId, userId }) {
             <h4>THÊM VÀO GIỎ HÀNG</h4>
             <div className="select-size">
               <p>Lựa chọn kích thước/ trọng lượng</p>
-
-              {checkWeight !== 0 &&
-              singleProduct?.product?.productType === "racket" ? (
+              {checkWeight === 0 ? (
+                <h3>LỰA CHỌN CỬA HÀNG</h3>
+              ) : checkWeight === -1 ? (
+                <h3>HẾT HÀNG</h3>
+              ) : checkWeight >= 1 &&
+                singleProduct?.product?.productType === "racket" ? (
                 allProductStore?.productOfOneStore?.map((product, index) => (
                   <button
                     key={index}
@@ -209,9 +221,16 @@ function RenderInfor({ productId, userId }) {
                   />
                   <button onClick={handleAdd}>+</button>
                 </div>
-                <button className="add-to-cart" onClick={handleAddToCart}>
-                  {addCart ? <LoadingScreen /> : "THÊM"}
-                </button>
+
+                {!isAuthenticated ? (
+                  <Link to="/login" state={{ from: location }} id="link-router">
+                    THÊM
+                  </Link>
+                ) : (
+                  <button className="add-to-cart" onClick={handleAddToCart}>
+                    {addCart ? <LoadingScreen /> : "THÊM"}
+                  </button>
+                )}
               </div>
               {noti ? <p>{noti}</p> : <></>}
             </div>

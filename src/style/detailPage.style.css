@@ -233,9 +233,25 @@ input[type="number"]::-webkit-outer-spin-button {
   flex-grow: 1;
 }
 
+#link-router:hover,
 #detailPage-container .detail-wrapper .infor .add-cart .add-to-cart:hover {
   background-color: #ffffff;
   color: #e95220;
+}
+
+#link-router {
+  border: 1px solid #e95220;
+  background-color: #e95220;
+  color: #ffffff;
+  text-decoration: none;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: 10px;
 }
 
 /* ------------------------------------------------------------------ */

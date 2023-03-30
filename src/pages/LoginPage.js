@@ -17,7 +17,7 @@ const defaultValues = {
   remember: true,
 };
 
-function LoginPage() {
+function LoginPage(local) {
   const auth = useAuth();
 
   const method = useForm({ resolver: yupResolver(LoginSchema), defaultValues });
@@ -34,7 +34,7 @@ function LoginPage() {
   const location = useLocation();
 
   const onSubmit = async (data) => {
-    const form = location.state?.from?.pathname || "/";
+    const form = location.state?.from?.pathname || "/" || local;
     let { email, password } = data;
 
     try {
