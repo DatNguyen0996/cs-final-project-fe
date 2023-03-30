@@ -70,7 +70,7 @@ function RenderInfor({ productId, userId }) {
     );
   }, [dispatch, storeId, singleProduct]);
 
-  const { isAuthenticated, isInitialized } = useAuth();
+  const { isAuthenticated } = useAuth();
   const location = useLocation();
 
   const handleAddToCart = () => {
