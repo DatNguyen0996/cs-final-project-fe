@@ -40,14 +40,7 @@ function Router() {
 
         <Route path="contact" element={<ContactPage />} />
         <Route path="intro" element={<IntroPage />} />
-        <Route
-          path="detail/:productId"
-          element={
-            <AuthRequire>
-              <DetailPage />
-            </AuthRequire>
-          }
-        />
+        <Route path="detail/:productId" element={<DetailPage />} />
 
         <Route
           path="listOfItem/:productTypeParam/:pageParam"
@@ -64,14 +57,7 @@ function Router() {
           element={<SearchPage />}
         />
 
-        <Route
-          path="listOfStore"
-          element={
-            <AuthRequire>
-              <ListOfStore />
-            </AuthRequire>
-          }
-        />
+        <Route path="listOfStore" element={<ListOfStore />} />
 
         {/* <Route
           path="profile/:userId"
