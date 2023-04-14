@@ -117,7 +117,7 @@ function LoginPage(local) {
               variant="contained"
               sx={{ width: 1, m: "20px 0" }}
             >
-              Gửi đánh giá
+              Đăng nhập
             </ColorButton>
           </FormProvider>
 

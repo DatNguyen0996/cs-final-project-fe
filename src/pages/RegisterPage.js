@@ -154,7 +154,7 @@ function RegisterPage() {
               variant="contained"
               sx={{ width: 1, m: "20px 0" }}
             >
-              Gửi đánh giá
+              Đặng ký tài khoản
             </ColorButton>
           </FormProvider>
 

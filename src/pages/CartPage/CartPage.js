@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
+import Alert from "@mui/material/Alert";
 
 import Item from "./components/Item";
 
@@ -79,6 +80,14 @@ function CartPage() {
         >
           <b>GIỎ HÀNG CỦA BẠN</b>
         </Typography>
+        {cart?.totalPage === 0 ? (
+          <Box>
+            <Alert severity="info">không có sản phẩm nào trong giỏ hàng</Alert>
+          </Box>
+        ) : (
+          <></>
+        )}
+
         {cart?.carts?.map((cart, index) => (
           <Item
             key={index}

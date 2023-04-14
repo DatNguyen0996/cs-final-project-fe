@@ -13,6 +13,7 @@ import { fCurrency } from "../../utils/numberFormat";
 import ManagePage from "../managerPage/ManagePage";
 import AdminPage from "../adminPage/AdminPage";
 
+import Alert from "@mui/material/Alert";
 import OrderStatus from "../../components/OrderStatus";
 import ProductType from "../../components/ProductType";
 import OrderDetail from "./components/OrderDetail";
@@ -114,17 +115,26 @@ function AccountPage() {
       }}
     >
       <Box sx={{ width: 1, maxWidth: 1200 }}>
-        <Tabs
-          value={ariaSelect}
-          onChange={handleChange}
-          textColor="primary"
-          indicatorColor="primary"
-        >
-          <Tab value="one" label="Tài khoản" />
-          <Tab value="two" label="Quản lý" />
-          <Tab value="three" label="Đơn hàng & Nhập kho" />
-          <Tab value="Four" label="Hộp thư" />
-        </Tabs>
+        {currentUser?.currentUser?.role !== "customer" ? (
+          <Tabs
+            value={ariaSelect}
+            onChange={handleChange}
+            textColor="primary"
+            indicatorColor="primary"
+          >
+            <Tab value="one" label="Tài khoản" />
+
+            <Tab value="three" label="Đơn hàng & Nhập kho" />
+            <Tab value="Four" label="Hộp thư" />
+            {currentUser?.currentUser?.role === "manager" ? (
+              <Tab value="two" label="Quản lý" />
+            ) : (
+              <></>
+            )}
+          </Tabs>
+        ) : (
+          <></>
+        )}
         {ariaSelect === "one" ? (
           <Box sx={{ mt: 2 }}>
             <Box sx={{ flexGrow: 1 }}>
@@ -208,6 +218,13 @@ function AccountPage() {
                     <b>ĐƠN HÀNG CỦA BẠN</b>
                   </Typography>
                   <Box sx={{ maxHeight: 600, overflow: "auto" }}>
+                    {orderOfUser.length === 0 ? (
+                      <Box>
+                        <Alert severity="info">Chưa có đơn hàng nào</Alert>
+                      </Box>
+                    ) : (
+                      <></>
+                    )}
                     {orderOfUser?.orders?.map((order, index) => (
                       <Box key={index} sx={{ mt: 2 }}>
                         <Box
