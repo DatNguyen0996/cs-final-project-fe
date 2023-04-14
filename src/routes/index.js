@@ -15,7 +15,7 @@ import NotFoundPage from "../pages/NotFoundPage";
 import RegisterPage from "../pages/RegisterPage";
 // import UserDetailPage from "../pages/UserProfilePage";
 import AuthRequire from "./AuthRequire";
-import CartPage from "../pages/CartPage";
+import CartPage from "../pages/CartPage/CartPage";
 import PaymentPage from "../pages/PaymentPage";
 import SaleOffPage from "../pages/SaleOffPage";
 import SearchPage from "../pages/SearchPage";

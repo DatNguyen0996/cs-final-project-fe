@@ -6,28 +6,9 @@ function Poster() {
   console.log(enableAuto);
   const slider = useRef();
 
-  // let count = 0;
-  // const autoRun = () => {
-  //   if (count < 4) {
-  //     count = count + 1;
-  //   } else {
-  //     count = 0;
-  //   }
-  //   setAttribute(count);
-  // };
-
   const setAttribute = (number) => {
     slider.current.style.transform = `translateX(-${number * 100}%)`;
   };
-
-  // if (enableAuto) {
-  //   timeDelay = setInterval(() => {
-  //     autoRun();
-  //     // console.log("ok");
-  //   }, 5000);
-  // } else {
-  //   clearInterval(timeDelay);
-  // }
 
   return (
     <div className="poster">

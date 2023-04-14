@@ -1,17 +1,17 @@
 function defaultProductCode({ code, setValue }) {
   code === "racket"
-    ? setValue("productCode", "p-a-")
+    ? setValue("code", "p-a-")
     : code === "shoe"
-    ? setValue("productCode", "p-b-")
+    ? setValue("code", "p-b-")
     : code === "shirt"
-    ? setValue("productCode", "p-c-")
+    ? setValue("code", "p-c-")
     : code === "shorts"
-    ? setValue("productCode", "p-d-")
+    ? setValue("code", "p-d-")
     : code === "sportDress"
-    ? setValue("productCode", "p-e-")
+    ? setValue("code", "p-e-")
     : code === "accessory"
-    ? setValue("productCode", "p-f-")
-    : setValue("productCode", "");
+    ? setValue("code", "p-f-")
+    : setValue("code", "");
 }
 
 export default defaultProductCode;

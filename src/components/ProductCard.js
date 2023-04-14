@@ -5,7 +5,7 @@ import { fCurrency } from "../utils/numberFormat";
 
 import "../style/style.Card.css";
 
-function Card({ product }) {
+function ProductCard({ product }) {
   const navitate = useNavigate();
   return (
     <div className="card" onClick={() => navitate(`/detail/${product._id}`)}>
@@ -40,4 +40,4 @@ function Card({ product }) {
   );
 }
 //
-export default Card;
+export default ProductCard;

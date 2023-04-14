@@ -1,12 +1,16 @@
 import React, { useEffect } from "react";
 import Poster from "../components/Poster";
+import Box from "@mui/material/Box";
+
+import CircularProgress from "@mui/material/CircularProgress";
+
 import ListsItem from "../components/ListsItem";
-import CardSlider from "../components/CardSlider";
+
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
+import ProductCardSlider from "../components/ProductCardSlider";
 
 import { useDispatch, useSelector } from "react-redux";
-import LoadingScreen from "../components/LoadingScreen";
 
 import {
   getAllProduct,
@@ -27,11 +31,19 @@ function HomePage() {
   );
 
   return (
-    <div className="homePage-container">
+    <Box
+      sx={{
+        width: 1,
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       {isLoading ? (
-        <div id="loading-screen-custom">
-          <LoadingScreen />
-        </div>
+        <Box sx={{ display: "flex" }}>
+          <CircularProgress />
+        </Box>
       ) : error === "unknown-error" ? (
         <Stack sx={{ width: "100%" }} spacing={2}>
           <Alert severity="error">Không thể kết nối đến máy chủ!!!</Alert>
@@ -39,15 +51,16 @@ function HomePage() {
       ) : (
         <>
           <Poster />
-          <p className="homePage-title">SẢN PHẨM MỚI</p>
-          <CardSlider products={products.products} />
-          <p className="homePage-title">DANH SÁCH SẢN PHẨM</p>
+          <ProductCardSlider
+            products={products.products}
+            name={"SẢN PHẨM MỚI"}
+          />
+
           <ListsItem />
-          <p className="homePage-title">SALE OFF</p>
-          <CardSlider products={saleOff.products} />
+          <ProductCardSlider products={saleOff.products} name={"SALE OFF"} />
         </>
       )}
-    </div>
+    </Box>
   );
 }
 

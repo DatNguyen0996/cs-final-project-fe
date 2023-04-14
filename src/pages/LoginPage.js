@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import logoImg from "../logoBadminton.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
@@ -7,28 +7,50 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import useAuth from "../hooks/userAuth";
 
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import { styled } from "@mui/material/styles";
+
+import IconButton from "@mui/material/IconButton";
+import Alert from "@mui/material/Alert";
+import InputAdornment from "@mui/material/InputAdornment";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+
+import { FormProvider, FTextField } from "../components/form";
+
 const LoginSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  password: Yup.string().required("Password is required"),
+  email: Yup.string().email("Email không hợp lệ").required("Yêu cầu Email"),
+  password: Yup.string().required("Yêu cầu mật khẩu"),
 });
 const defaultValues = {
   email: "",
   password: "",
-  remember: true,
 };
+
+const ColorButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText("#e95220"),
+  backgroundColor: "#e95220",
+  "&:hover": {
+    backgroundColor: "#fff",
+    color: "#e95220",
+  },
+}));
 
 function LoginPage(local) {
   const auth = useAuth();
 
-  const method = useForm({ resolver: yupResolver(LoginSchema), defaultValues });
+  const methods = useForm({
+    resolver: yupResolver(LoginSchema),
+    defaultValues,
+  });
 
   const {
-    register,
     handleSubmit,
     reset,
     setError,
-    formState: { errors, isSubmitting },
-  } = method;
+    formState: { errors },
+  } = methods;
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -47,6 +69,8 @@ function LoginPage(local) {
     }
   };
 
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <div id="sign-in-up-container">
       <img id="store-logo" src={logoImg} alt="Logo" />
@@ -58,30 +82,49 @@ function LoginPage(local) {
             <button id="register">Register</button>
           </Link>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <label htmlFor="email">Email</label>
-          <input type="text" id="email" {...register("email")} />
-          <label htmlFor="password">Password</label>
-          <input type="password" id="password" {...register("password")} />
+        <Box>
+          <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+            <FTextField
+              name="email"
+              sx={{ width: 1, m: "20px 0" }}
+              label="Email"
+            />
+            <FTextField
+              name="password"
+              label="Mật khẩu"
+              sx={{ width: 1, mb: "20px" }}
+              type={showPassword ? "text" : "password"}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowPassword(!showPassword)}
+                      edge="end"
+                    >
+                      {showPassword ? (
+                        <VisibilityIcon />
+                      ) : (
+                        <VisibilityOffIcon />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <ColorButton
+              type="submit"
+              size="large"
+              variant="contained"
+              sx={{ width: 1, m: "20px 0" }}
+            >
+              Gửi đánh giá
+            </ColorButton>
+          </FormProvider>
+
           {!!errors.responseError && (
-            <p className="error">
-              <img src="images/error.png" alt="error" />
-              {errors.responseError.message}
-            </p>
+            <Alert severity="error">{errors.responseError.message}</Alert>
           )}
-
-          <div className="btn-remember-login">
-            <div>
-              <label htmlFor="remember">Remember me</label>
-              <input type="checkBox" id="remember" {...register("remember")} />
-            </div>
-            <button className="login">
-              {isSubmitting ? "Loading..." : "Login"}
-            </button>
-          </div>
-        </form>
-
-        <button className="forget-pasword">Forget password</button>
+        </Box>
       </div>
     </div>
   );

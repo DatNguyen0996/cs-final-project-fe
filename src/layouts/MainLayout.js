@@ -2,19 +2,29 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import MainFooter from "./MainFooter";
 import MainHeader from "./MainHeader";
-import "../style/style.MainLayout.css";
 import AlertMsg from "../components/AlertMsg";
+import Box from "@mui/material/Box";
 
 function MainLayout() {
   return (
-    <div id="main-container">
+    <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <MainHeader />
       <AlertMsg />
-      <div className="main-body-wrapper">
+      <Box
+        sx={{
+          flexGrow: 1,
+          width: 1,
+          position: "relative",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          p: "20px 10px",
+        }}
+      >
         <Outlet />
-      </div>
+      </Box>
       <MainFooter />
-    </div>
+    </Box>
   );
 }
 

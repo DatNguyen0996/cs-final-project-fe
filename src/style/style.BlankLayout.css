@@ -121,20 +121,20 @@ body {
   flex-direction: column;
 }
 
-#sign-in-up-container .form-wrapper form input {
+/* #sign-in-up-container .form-wrapper form input {
   height: 30px;
   margin-bottom: 10px;
   border-radius: 15px;
   border: 1px solid #e95220;
   padding: 10px;
   font-size: 0.9rem;
-}
+} */
 
-#sign-in-up-container .form-wrapper form input:focus {
+/* #sign-in-up-container .form-wrapper form input:focus {
   background-color: #e95220;
   outline: none;
   color: #ffffff;
-}
+} */
 
 #sign-in-up-container .form-wrapper form .error {
   padding: 0 10px;

@@ -94,6 +94,32 @@ export const preOrder = (carts, data) => async (dispatch) => {
 
   let preOrder = carts.filter((cart) => cartSelect.includes(cart._id));
 
+  let storeList = [];
+  let newStoreList = [];
+
+  preOrder.map((item) => {
+    if (storeList.length === 0) {
+      storeList.push(item.storeId._id);
+      newStoreList = [
+        ...newStoreList,
+        { storeId: item.storeId._id, storeName: item.storeId.name, items: [] },
+      ];
+    } else {
+      if (!storeList.includes(item.storeId._id)) {
+        storeList.push(item.storeId._id);
+        newStoreList = [
+          ...newStoreList,
+          {
+            storeId: item.storeId._id,
+            storeName: item.storeId.name,
+            items: [],
+          },
+        ];
+      }
+    }
+    return storeList;
+  });
+
   preOrder = preOrder.map((item) => {
     return {
       ...item,
@@ -101,7 +127,7 @@ export const preOrder = (carts, data) => async (dispatch) => {
         item.price * ((100 - item.productId.saleOff) / 100) * item.quantity,
     };
   });
-  console.log(preOrder);
+  console.log(newStoreList);
 
   dispatch(slice.actions.preOrderSuccess(preOrder));
 };

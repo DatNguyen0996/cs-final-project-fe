@@ -1,5 +1,9 @@
 import React from "react";
-import IconClose from "../../../components/IconClose";
+
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+
+import Grid from "@mui/material/Grid";
 
 import { fCurrency } from "../../../utils/numberFormat";
 
@@ -23,83 +27,102 @@ function OrderStatus({ value }) {
   );
 }
 
-function OrderDetail({ order, setOpenOrder }) {
+function OrderDetail({ order }) {
   return (
-    <div id="order-detail">
-      <div className="order-wrapper">
-        <div className="close" onClick={() => setOpenOrder(false)}>
-          <IconClose />
-        </div>
-        <div className="order-box">
-          <div className="header">
-            <div className="image">
-              <img src="/images/logoBadminton.png" alt="" />
-            </div>
-            <div className="infor">
-              <h1>BADMINTON STORE</h1>
-              <p>
-                <b>Mã đơn hàng: </b>
-                <i>{order._id}</i>
-              </p>
-            </div>
-          </div>
-
-          <div className="address">
-            <div className="from">
-              <b>Từ</b>
-              <p>{order.storeId.name}</p>
-              <p>{order.storeId.phone}</p>
-              <p>{order.storeId.address}</p>
-            </div>
-            <div className="to">
-              <b>Đến</b>
-              <p>{order.receiver}</p>
-              <p>{order.phone}</p>
-              <p>{order.address}</p>
-            </div>
-          </div>
-          <div className="order-status">
-            <div>
-              <b>Trạng thái đơn hàng: </b>
-              <span>
-                <OrderStatus value={order.status} />
-              </span>
-            </div>
-            <div>
-              <b>Hình thức giao hàng: </b>
-              <span>
-                {" "}
-                <i>
-                  {order.receiving === "delivery"
-                    ? "Giao hàng tận nơi"
-                    : "lấy hàng tại shop"}
-                </i>
-              </span>
-            </div>
-          </div>
-
-          <div className="order-infomation">
+    <Box
+      sx={{
+        bgcolor: "#fff",
+        borderRadius: 3,
+        p: "30px 10px",
+      }}
+    >
+      <Box sx={{ bgcolor: "#2222", maxHeight: 600, overflow: "auto" }}>
+        <Box sx={{ border: "1px solid #000" }}>
+          <Typography sx={{ flexGrow: 1 }} variant="h4" textAlign="center">
+            BADMINTON STORE
+          </Typography>
+          <Typography sx={{ flexGrow: 1 }} variant="body1" textAlign="center">
+            <b>Mã đơn hàng:</b> <i>{order._id}</i>
+          </Typography>
+        </Box>
+        <Box sx={{ flexGrow: 1, border: "1px solid #000", p: "10px" }}>
+          <Grid container spacing={2} columns={{ xs: 1, sm: 2, md: 2 }}>
+            <Grid item xs={1} sm={1} md={1}>
+              <Typography sx={{ flexGrow: 1 }} variant="body1">
+                <b>Từ:</b>
+              </Typography>
+              <Typography sx={{ flexGrow: 1 }} variant="body1">
+                {order.storeId.name}
+              </Typography>
+              <Typography sx={{ flexGrow: 1 }} variant="body1">
+                {order.storeId.phone}
+              </Typography>
+              <Typography sx={{ flexGrow: 1 }} variant="body1">
+                {order.storeId.address}
+              </Typography>
+            </Grid>
+            <Grid item xs={1} sm={1} md={1}>
+              <Typography sx={{ flexGrow: 1 }} variant="body1">
+                <b>Đến:</b>
+              </Typography>
+              <Typography sx={{ flexGrow: 1 }} variant="body1">
+                {order.receiver}
+              </Typography>
+              <Typography sx={{ flexGrow: 1 }} variant="body1">
+                {order.phone}
+              </Typography>
+              <Typography sx={{ flexGrow: 1 }} variant="body1">
+                {order.address}
+              </Typography>
+            </Grid>
+          </Grid>
+        </Box>
+        <Box sx={{ flexGrow: 1, border: "1px solid #000", p: "10px" }}>
+          <Typography sx={{ flexGrow: 1 }} variant="body1">
+            <b>Trạng thái đơn hàng:</b>
+            <OrderStatus value={order.status} />
+          </Typography>
+          <Typography sx={{ flexGrow: 1 }} variant="body1">
+            <b>Hình thức giao hàng:</b>
+            <i>
+              {order.receiving === "delivery"
+                ? "Giao hàng tận nơi"
+                : "lấy hàng tại shop"}
+            </i>
+          </Typography>
+        </Box>
+        <Box sx={{ flexGrow: 1, border: "1px solid #000", p: "10px" }}>
+          <Typography sx={{ flexGrow: 1 }} variant="body1">
             <b>Nội dung đơn hàng (Tên sản phẩm, SL)</b>
-            {order.items.map((item) => {
-              return (
-                <p>
-                  - {item.product.name}, -<b>SL:</b> x{item.quantity}, -
-                  <b>$: {fCurrency(item.totalPrice)}đ</b>
-                </p>
-              );
-            })}
-          </div>
-          <div className="price">
-            <p>
-              <b>Tổng tiền</b>
-            </p>
-            <div>
-              <b>{fCurrency(order.totalPrice)} VND</b>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+          </Typography>
+          {order.items.map((item) => (
+            <Typography sx={{ flexGrow: 1, mt: 2 }} variant="body1">
+              -<span>{item.product.name}</span> -{" "}
+              <span>
+                <b>SL:</b>x{item.quantity}
+              </span>{" "}
+              -{" "}
+              <span>
+                <b>$:</b>
+                {fCurrency(item.totalPrice)}đ
+              </span>
+            </Typography>
+          ))}
+        </Box>
+        <Box sx={{ flexGrow: 1, border: "1px solid #000", p: "10px" }}>
+          <Typography sx={{ flexGrow: 1 }} variant="body1">
+            <b>Tổng tiền</b>
+          </Typography>
+          <Typography
+            sx={{ flexGrow: 1, mt: 2 }}
+            variant="h4"
+            textAlign="center"
+          >
+            <b>{fCurrency(order.totalPrice)} VND</b>
+          </Typography>
+        </Box>
+      </Box>
+    </Box>
   );
 }
 

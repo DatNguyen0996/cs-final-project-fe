@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import logoImg from "../logoBadminton.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
@@ -7,13 +7,25 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import useAuth from "../hooks/userAuth";
 
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import { styled } from "@mui/material/styles";
+
+import IconButton from "@mui/material/IconButton";
+import Alert from "@mui/material/Alert";
+import InputAdornment from "@mui/material/InputAdornment";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+
+import { FormProvider, FTextField } from "../components/form";
+
 const LoginSchema = Yup.object().shape({
-  name: Yup.string().required("Name is required"),
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  password: Yup.string().required("Password is required"),
+  name: Yup.string().required("Yêu cầu tên tài khoản"),
+  email: Yup.string().email("Email không hợp lệ").required("Yêu cầu Email"),
+  password: Yup.string().required("Yêu cầu mật khẩu"),
   passwordConfirm: Yup.string()
-    .required("Confirm your password")
-    .oneOf([Yup.ref("password")], "Password not match"),
+    .required("Yêu cầu xác nhận mật khẩu")
+    .oneOf([Yup.ref("password")], "Mật khẩu không trùng"),
 });
 const defaultValues = {
   email: "",
@@ -21,18 +33,29 @@ const defaultValues = {
   passwordConfirm: "",
 };
 
+const ColorButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.getContrastText("#e95220"),
+  backgroundColor: "#e95220",
+  "&:hover": {
+    backgroundColor: "#fff",
+    color: "#e95220",
+  },
+}));
+
 function RegisterPage() {
   const auth = useAuth();
 
-  const method = useForm({ resolver: yupResolver(LoginSchema), defaultValues });
+  const methods = useForm({
+    resolver: yupResolver(LoginSchema),
+    defaultValues,
+  });
 
   const {
-    register,
     handleSubmit,
     reset,
     setError,
-    formState: { errors, isSubmitting },
-  } = method;
+    formState: { errors },
+  } = methods;
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -51,6 +74,10 @@ function RegisterPage() {
     }
   };
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirmation, setShowPasswordConfirmation] =
+    useState(false);
+
   return (
     <div id="sign-in-up-container">
       <img id="store-logo" src={logoImg} alt="Logo" />
@@ -62,38 +89,79 @@ function RegisterPage() {
             <button id="register">Login</button>
           </Link>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <label htmlFor="email">Email</label>
-          <input type="text" name="" id="email" {...register("email")} />
-          <label htmlFor="username">Username</label>
-          <input type="text" name="" id="username" {...register("name")} />
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name=""
-            id="password"
-            {...register("password")}
-          />
-          <label htmlFor="password-confirm">Password confirmation:</label>
-          <input
-            type="password"
-            name=""
-            id="password-confirm"
-            {...register("passwordConfirm")}
-          />
-          {!!errors.responseError && (
-            <p className="error">
-              <img src="images/error.png" alt="error" />
-              {errors.responseError.message}
-            </p>
-          )}
 
-          <div className="btn-remember-login">
-            <button className="login">
-              {isSubmitting ? "Loading..." : "Register"}
-            </button>
-          </div>
-        </form>
+        <Box>
+          <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
+            <FTextField
+              name="email"
+              sx={{ width: 1, m: "20px 0" }}
+              label="Email"
+            />
+            <FTextField
+              name="name"
+              sx={{ width: 1, m: "20px 0" }}
+              label="Họ và tên"
+            />
+            <FTextField
+              name="password"
+              label="Mật khẩu"
+              sx={{ width: 1, mb: "20px" }}
+              type={showPassword ? "text" : "password"}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setShowPassword(!showPassword)}
+                      edge="end"
+                    >
+                      {showPassword ? (
+                        <VisibilityIcon />
+                      ) : (
+                        <VisibilityOffIcon />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <FTextField
+              sx={{ width: 1, mb: "20px" }}
+              name="passwordConfirm"
+              label="Xác nhận mật khẩu"
+              type={showPasswordConfirmation ? "text" : "password"}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() =>
+                        setShowPasswordConfirmation(!showPasswordConfirmation)
+                      }
+                      edge="end"
+                    >
+                      {showPasswordConfirmation ? (
+                        <VisibilityIcon />
+                      ) : (
+                        <VisibilityOffIcon />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <ColorButton
+              type="submit"
+              size="large"
+              variant="contained"
+              sx={{ width: 1, m: "20px 0" }}
+            >
+              Gửi đánh giá
+            </ColorButton>
+          </FormProvider>
+
+          {!!errors.responseError && (
+            <Alert severity="error">{errors.responseError.message}</Alert>
+          )}
+        </Box>
       </div>
     </div>
   );

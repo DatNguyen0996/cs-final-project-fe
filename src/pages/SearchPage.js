@@ -1,16 +1,55 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
+import Box from "@mui/material/Box";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
+import CloseIcon from "@mui/icons-material/Close";
+import CircularProgress from "@mui/material/CircularProgress";
+import Grid from "@mui/material/Unstable_Grid2";
 
-import "../style/style.ListOfItem.css";
-import LoadingScreen from "../components/LoadingScreen";
 import { filterProduct } from "../features/Product/ProductSlice";
 
-import Card from "../components/Card";
+import ProductCard from "../components/ProductCardTest";
+
+const typeRender = {
+  racket: "Vợt cầu lông",
+  shoe: "Giày cầu lông",
+  shirt: "Áo cầu lông",
+  shorts: "Quần cầu lông",
+  sportDress: "Váy cầu lông",
+  accessory: "Phụ kiện cầu lông",
+};
+
+const priceRender = {
+  priceLevelOne: "Dưới 500.000đ",
+  priceLevelTwo: "500.000đ - 1 triệu",
+  priceLevelThree: "1 - 2 triệu",
+  priceLevelFour: "2 - 3 triệu",
+  priceLevelFive: "Trên 3 triệu",
+};
+const brandRender = [
+  "Yonex",
+  "Lining",
+  "Victor",
+  "Mizuno",
+  "Proace",
+  "Fleet",
+  "Flypower",
+  "Apacs",
+  "VS",
+  "Kumpoo",
+];
 
 function ListOfItemsPage() {
   const navitate = useNavigate();
@@ -20,36 +59,9 @@ function ListOfItemsPage() {
 
   const { products, isLoading, error } = useSelector((state) => state.product);
 
-  const filter = useRef();
-
   const [filterField, setFilterField] = useState({});
 
-  const [bodyWidth, setBodyWidth] = useState(
-    document.querySelector(`body`).offsetWidth
-  );
-  window.addEventListener("resize", () =>
-    setBodyWidth(document.querySelector(`body`).offsetWidth)
-  );
-
-  const [visibility, setVisibility] = useState();
-
   const dispatch = useDispatch();
-
-  const handleFilterClick = () => {
-    setVisibility(!visibility);
-  };
-
-  if (filter.current !== undefined) {
-    visibility
-      ? (filter.current.style.right = "0px")
-      : (filter.current.style.right = "-250px");
-    if (bodyWidth < 960) {
-      filter.current.classList.add("responsive");
-    } else {
-      filter.current.classList.remove("responsive");
-      filter.current.style.right = "0px";
-    }
-  }
 
   const [productType, setProductType] = useState(productTypeParam);
   const [page, setPage] = useState(pageParam);
@@ -75,260 +87,218 @@ function ListOfItemsPage() {
     navitate(`/search/filter/${search}/${value}`);
   };
 
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(!open);
+
   return (
-    <div className="list-item-page-container">
-      <div className="list-item-wrapper">
-        <div className="list-item-header">
-          {bodyWidth < 960 ? (
-            <div className="filter-icon" onClick={handleFilterClick}>
-              <img src="/images/filter.png" alt="" />
-            </div>
+    <Box sx={{ width: 1, maxWidth: "1100px", p: "0 10px" }}>
+      <Stack
+        direction="row"
+        spacing={{ xs: 0, sm: 0, md: 1 }}
+        sx={{
+          width: 1,
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Box
+          sx={{
+            width: "300px",
+            position: { xs: "absolute", sm: "absolute", md: "relative" },
+            left: {
+              xs: open ? "5px" : "-300px",
+              sm: open ? "5px" : "-300px",
+              md: "0px",
+            },
+            border: "1px solid #2222",
+            borderRadius: "5px",
+            bgcolor: "#fff",
+            transition: "all 1s ease-in-out",
+            zIndex: 100,
+          }}
+        >
+          <Box
+            sx={{
+              bgcolor: "#e1f1ff",
+              height: "50px",
+              borderRadius: "5px 5px 0 0",
+              p: "0 5px",
+            }}
+          >
+            <Stack direction="row" spacing={1} sx={{ height: 1 }}>
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{
+                  height: 1,
+                  display: "flex",
+                  alignItems: "center",
+                  fontWeight: "bold",
+                  color: "#e95220",
+                  flexGrow: 1,
+                }}
+              >
+                Bộ lọc
+              </Typography>
+              <Button onClick={handleSubmit(onSubmit)}>
+                <FilterAltIcon
+                  sx={{ height: 1, fontSize: 35, color: "#e95220" }}
+                />
+              </Button>
+            </Stack>
+          </Box>
+
+          <Box>
+            <Typography
+              sx={{
+                m: "10px 10px",
+                bgcolor: "#e1f1ff",
+                p: "5px 10px",
+                color: "#e95220",
+                fontSize: "1.2rem",
+              }}
+            >
+              Loại sản phẩm
+            </Typography>
+            <FormGroup sx={{ pl: "20px" }}>
+              {Object.keys(typeRender).map((type, index) => (
+                <FormControlLabel
+                  key={index}
+                  control={<Checkbox {...register(`productType`)} />}
+                  label={Object.values(typeRender)[index]}
+                  value={type}
+                />
+              ))}
+            </FormGroup>
+          </Box>
+
+          <Box>
+            <Typography
+              sx={{
+                m: "10px 10px",
+                bgcolor: "#e1f1ff",
+                p: "5px 10px",
+                color: "#e95220",
+                fontSize: "1.2rem",
+              }}
+            >
+              Chọn mức giá
+            </Typography>
+            <FormGroup sx={{ pl: "20px" }}>
+              {Object.keys(priceRender).map((type, index) => (
+                <FormControlLabel
+                  key={index}
+                  control={<Checkbox {...register(`price`)} />}
+                  label={Object.values(priceRender)[index]}
+                  value={type}
+                />
+              ))}
+            </FormGroup>
+          </Box>
+
+          <Box>
+            <Typography
+              sx={{
+                m: "10px 10px",
+                bgcolor: "#e1f1ff",
+                p: "5px 10px",
+                color: "#e95220",
+                fontSize: "1.2rem",
+              }}
+            >
+              Thương hiệu
+            </Typography>
+            <FormGroup sx={{ pl: "20px" }}>
+              {brandRender.map((type, index) => (
+                <FormControlLabel
+                  key={index}
+                  control={<Checkbox {...register(`brand`)} value={type} />}
+                  label={type}
+                />
+              ))}
+            </FormGroup>
+          </Box>
+        </Box>
+
+        <Box sx={{ flexGrow: 1, maxWidth: "800px" }}>
+          <Box
+            sx={{
+              bgcolor: "#e1f1ff",
+              height: "50px",
+              borderRadius: "5px 5px 0 0",
+              p: "0 20px",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{
+                height: 1,
+                display: "flex",
+                alignItems: "center",
+                fontWeight: "bold",
+                color: "#e95220",
+                flexGrow: 1,
+              }}
+            >
+              Danh sách sản phẩm
+            </Typography>
+            <IconButton
+              color="inherit"
+              edge="start"
+              onClick={handleOpen}
+              sx={{
+                height: "40px",
+                width: "40px",
+                display: { xs: "block", sm: "block", md: "none" },
+              }}
+            >
+              {open ? <CloseIcon /> : <MenuIcon />}
+            </IconButton>
+          </Box>
+
+          {isLoading ? (
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                mt: 5,
+              }}
+            >
+              <CircularProgress />
+            </Box>
+          ) : error === "unknown-error" ? (
+            <Stack sx={{ width: "100%" }} spacing={2}>
+              <Alert severity="error">Không thể kết nối đến máy chủ!</Alert>
+            </Stack>
           ) : (
-            <></>
+            <Box sx={{ flexGrow: 1, maxWidth: "800px" }}>
+              <Grid container spacing={0} columns={{ xs: 4, sm: 9, md: 12 }}>
+                {products?.products?.map((product, index) => (
+                  <Grid xs={2} sm={3} md={3} key={index}>
+                    <ProductCard product={product} />
+                  </Grid>
+                ))}
+              </Grid>
+              {products.totalPage <= 1 || products.totalPage === undefined ? (
+                <></>
+              ) : (
+                <Box sx={{ p: 2, display: "flex", justifyContent: "center" }}>
+                  <Pagination
+                    count={products.totalPage}
+                    page={page}
+                    onChange={handleChange}
+                  />
+                </Box>
+              )}
+            </Box>
           )}
-        </div>
-
-        {isLoading ? (
-          <LoadingScreen />
-        ) : error === "unknown-error" ? (
-          <Stack sx={{ width: "100%" }} spacing={2}>
-            <Alert severity="error">Không thể kết nối đến máy chủ!!!</Alert>
-          </Stack>
-        ) : (
-          <div className="list-item">
-            {products?.products?.map((product, index) => (
-              <div key={index} className="card-box">
-                <Card product={product} />
-              </div>
-            ))}
-          </div>
-        )}
-        {products.totalPage <= 1 || products.totalPage === undefined ? (
-          <></>
-        ) : (
-          <Stack spacing={2} m={3} justifyContent="center" alignItems="center">
-            <Pagination
-              count={products.totalPage}
-              page={Number(page)}
-              onChange={handleChange}
-            />
-          </Stack>
-        )}
-      </div>
-
-      <div className="filter" ref={filter}>
-        <div className="filter-header">
-          <p>BỘ LỌC</p>
-          <button onClick={handleSubmit(onSubmit)}>
-            <img src="/images/filter.png" alt="filter icon" />
-          </button>
-        </div>
-
-        <form>
-          <div className="field-store field-container ">
-            <p className="title">LOẠI SẢN PHẨM</p>
-
-            <div className="field">
-              <input
-                {...register(`productType`)}
-                id="store-one"
-                type="checkBox"
-                value={"racket"}
-              />{" "}
-              <label htmlFor="store-one">Vợt cầu lông</label>
-            </div>
-            <div className="field">
-              <input
-                {...register(`productType`)}
-                id="store-one"
-                type="checkBox"
-                value={"shoe"}
-              />{" "}
-              <label htmlFor="store-one">Giày cầu lông</label>
-            </div>
-            <div className="field">
-              <input
-                {...register(`productType`)}
-                id="store-one"
-                type="checkBox"
-                value={"shirt"}
-              />{" "}
-              <label htmlFor="store-one">Áo cầu lông</label>
-            </div>
-            <div className="field">
-              <input
-                {...register(`productType`)}
-                id="store-one"
-                type="checkBox"
-                value={"shorts"}
-              />{" "}
-              <label htmlFor="store-one">Quần cầu lông</label>
-            </div>
-            <div className="field">
-              <input
-                {...register(`productType`)}
-                id="store-one"
-                type="checkBox"
-                value={"sportDress"}
-              />{" "}
-              <label htmlFor="store-one">Váy cầu lông</label>
-            </div>
-            <div className="field">
-              <input
-                {...register(`productType`)}
-                id="store-one"
-                type="checkBox"
-                value={"accessory"}
-              />{" "}
-              <label htmlFor="store-one">Phụ kiện cầu lông</label>
-            </div>
-          </div>
-
-          <div className="field-price field-container ">
-            <p className="title">CHỌN MỨC GIÁ</p>
-            <div className="field">
-              <input
-                id="price-one"
-                type="checkBox"
-                {...register(`price`)}
-                value={"priceLevelOne"}
-              />{" "}
-              <label htmlFor="price-one"> Dưới 500.000đ</label>
-            </div>
-            <div className="field">
-              <input
-                id="price-two"
-                type="checkBox"
-                {...register(`price`)}
-                value={"priceLevelTwo"}
-              />{" "}
-              <label htmlFor="price-two"> 500.000đ - 1 triệu</label>
-            </div>
-            <div className="field">
-              <input
-                id="price-three"
-                type="checkBox"
-                {...register(`price`)}
-                value={"priceLevelThree"}
-              />{" "}
-              <label htmlFor="price-three"> 1 - 2 triệu</label>
-            </div>
-            <div className="field">
-              <input
-                id="price-four"
-                type="checkBox"
-                {...register(`price`)}
-                value={"priceLevelFour"}
-              />{" "}
-              <label htmlFor="price-four"> 2 - 3 triệu</label>
-            </div>
-            <div className="field">
-              <input
-                id="price-five"
-                type="checkBox"
-                {...register(`price`)}
-                value={"priceLevelFive"}
-              />{" "}
-              <label htmlFor="price-five"> Trên 3 triệu</label>
-            </div>
-          </div>
-
-          <div className="field-brand field-container ">
-            <p className="title">THƯƠNG HIỆU</p>
-            <div className="field">
-              <input
-                id="brand-one"
-                type="checkBox"
-                {...register(`brand`)}
-                value={"Yonex"}
-              />{" "}
-              <label htmlFor="brand-one">Yonex</label>
-            </div>
-            <div className="field">
-              <input
-                id="brand-two"
-                type="checkBox"
-                {...register(`brand`)}
-                value={"Lining"}
-              />{" "}
-              <label htmlFor="brand-two">Lining</label>
-            </div>
-            <div className="field">
-              <input
-                id="brand-three"
-                type="checkBox"
-                {...register(`brand`)}
-                value={"Victor"}
-              />{" "}
-              <label htmlFor="brand-three">Victor</label>
-            </div>
-            <div className="field">
-              <input
-                id="brand-four"
-                type="checkBox"
-                {...register(`brand`)}
-                value={"Mizuno"}
-              />{" "}
-              <label htmlFor="brand-four">Mizuno</label>
-            </div>
-            <div className="field">
-              <input
-                id="brand-five"
-                type="checkBox"
-                {...register(`brand`)}
-                value={"Proace"}
-              />{" "}
-              <label htmlFor="brand-five">Proace</label>
-            </div>
-            <div className="field">
-              <input
-                id="brand-six"
-                type="checkBox"
-                {...register(`brand`)}
-                value={"Fleet"}
-              />{" "}
-              <label htmlFor="brand-six">Fleet</label>
-            </div>
-            <div className="field">
-              <input
-                id="brand-seven"
-                type="checkBox"
-                {...register(`brand`)}
-                value={"Flypower"}
-              />{" "}
-              <label htmlFor="brand-seven">Flypower</label>
-            </div>
-            <div className="field">
-              <input
-                id="brand-eight"
-                type="checkBox"
-                {...register(`brand`)}
-                value={"Apacs"}
-              />{" "}
-              <label htmlFor="brand-eight">Apacs</label>
-            </div>
-            <div className="field">
-              <input
-                id="brand-nine"
-                type="checkBox"
-                {...register(`brand`)}
-                value={"VS"}
-              />{" "}
-              <label htmlFor="brand-nine">VS</label>
-            </div>
-            <div className="field">
-              <input
-                id="brand-ten"
-                type="checkBox"
-                {...register(`brand`)}
-                value={"Kumpoo"}
-              />{" "}
-              <label htmlFor="brand-ten">Kumpoo</label>
-            </div>
-          </div>
-        </form>
-      </div>
-    </div>
+        </Box>
+      </Stack>
+    </Box>
   );
 }
 
