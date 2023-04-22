@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { styled } from "@mui/material/styles";
 import Alert from "@mui/material/Alert";
-import CircularProgress from "@mui/material/CircularProgress";
+// import CircularProgress from "@mui/material/CircularProgress";
 
 import Item from "./components/Item";
 
@@ -47,7 +47,7 @@ function CartPage() {
     dispatch(getCart({ userId: currentUser?.currentUser?._id }));
   };
 
-  const { cart, isLoading } = useSelector((state) => state.cart);
+  const { cart } = useSelector((state) => state.cart);
   let totalPrice = 0;
   cart?.carts?.map((e) => {
     return (totalPrice = e.price * e.quantity + totalPrice);
@@ -64,6 +64,12 @@ function CartPage() {
   const [selecion, setSelecion] = useState(null);
   const [count, setCount] = useState(0);
 
+  // return
+  // isLoading ? (
+  //   <Box sx={{ display: "flex" }}>
+  //     <CircularProgress />
+  //   </Box>
+  // ) :
   return (
     <Box
       sx={{
@@ -73,53 +79,51 @@ function CartPage() {
         alignItems: "center",
       }}
     >
-      {isLoading ? (
-        <Box sx={{ display: "flex" }}>
-          <CircularProgress />
-        </Box>
-      ) : (
-        <Box sx={{ width: 1, maxWidth: 1200 }}>
-          <Typography
-            variant="h5"
-            sx={{ width: 1, bgcolor: "#e1f1ff", p: 2, borderRadius: 2, mb: 3 }}
-            textAlign="center"
-          >
-            <b>GIỎ HÀNG CỦA BẠN</b>
-          </Typography>
-          {cart?.totalPage === 0 ? (
-            <Box>
-              <Alert severity="info">
-                không có sản phẩm nào trong giỏ hàng
-              </Alert>
-            </Box>
-          ) : (
-            <>
-              {cart?.carts?.map((cart, index) => (
-                <Item
-                  key={index}
-                  index={index}
-                  cart={cart}
-                  user={currentUser}
-                  register={register}
-                  handleDeleteCart={handleDeleteCart}
-                  setSelecion={setSelecion}
-                  selecion={selecion}
-                  count={count}
-                  setCount={setCount}
-                />
-              ))}
-              <ColorButton
-                onClick={handleSubmit(onsubmit)}
-                size="large"
-                variant="contained"
-                sx={{ mt: 3, width: 1 }}
-              >
-                Thanh toán
-              </ColorButton>
-            </>
-          )}
-        </Box>
-      )}
+      <Box sx={{ width: 1, maxWidth: 1200 }}>
+        <Typography
+          variant="h5"
+          sx={{
+            width: 1,
+            bgcolor: "#e1f1ff",
+            p: 2,
+            borderRadius: 2,
+            mb: 3,
+          }}
+          textAlign="center"
+        >
+          <b>GIỎ HÀNG CỦA BẠN</b>
+        </Typography>
+        {cart?.totalPage === 0 ? (
+          <Box>
+            <Alert severity="info">không có sản phẩm nào trong giỏ hàng</Alert>
+          </Box>
+        ) : (
+          <>
+            {cart?.carts?.map((cart, index) => (
+              <Item
+                key={index}
+                index={index}
+                cart={cart}
+                user={currentUser}
+                register={register}
+                handleDeleteCart={handleDeleteCart}
+                setSelecion={setSelecion}
+                selecion={selecion}
+                count={count}
+                setCount={setCount}
+              />
+            ))}
+            <ColorButton
+              onClick={handleSubmit(onsubmit)}
+              size="large"
+              variant="contained"
+              sx={{ mt: 3, width: 1 }}
+            >
+              Thanh toán
+            </ColorButton>
+          </>
+        )}
+      </Box>
     </Box>
   );
 }
