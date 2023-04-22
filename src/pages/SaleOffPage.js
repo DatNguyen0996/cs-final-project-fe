@@ -274,6 +274,10 @@ function ListOfItemsPage() {
             <Stack sx={{ width: "100%" }} spacing={2}>
               <Alert severity="error">Không thể kết nối đến máy chủ!</Alert>
             </Stack>
+          ) : products.countProducts === 0 ? (
+            <Box mt={2}>
+              <Alert severity="info">không tìm thấy sản phẩm nào</Alert>
+            </Box>
           ) : (
             <Box sx={{ flexGrow: 1, maxWidth: "800px" }}>
               <Grid container spacing={0} columns={{ xs: 4, sm: 9, md: 12 }}>

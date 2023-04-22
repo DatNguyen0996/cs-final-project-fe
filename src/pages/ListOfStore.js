@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import { getAllStore } from "../features/Store/StoreSlice";
 
@@ -11,16 +12,20 @@ function ListOfStore() {
     dispatch(getAllStore());
   }, [dispatch]);
   const { stores, isLoading } = useSelector((state) => state.store);
-  console.log(stores, isLoading);
+
   return (
-    <>
-      <Box
-        sx={{
-          width: 1,
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
+    <Box
+      sx={{
+        width: 1,
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
+      {isLoading ? (
+        <Box sx={{ display: "flex" }}>
+          <CircularProgress />
+        </Box>
+      ) : (
         <Box
           sx={{
             width: 1,
@@ -73,8 +78,8 @@ function ListOfStore() {
             </Box>
           </Box>
         </Box>
-      </Box>
-    </>
+      )}
+    </Box>
   );
 }
 

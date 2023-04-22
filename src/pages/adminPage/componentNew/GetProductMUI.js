@@ -196,7 +196,7 @@ function GetProductMUI({ expanded, handleChange, panel, tabName }) {
                   disabled={storeId === ""}
                   fullWidth
                   select
-                  label="Chọn cửa hàng"
+                  label="Chọn kiểu sản phẩm"
                   value={nameProductType}
                   onChange={(event) => {
                     handleChangeType(event.target.value);
