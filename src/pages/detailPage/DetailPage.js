@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
 
 import { getSingleProduct } from "../../features/Product/ProductSlice";
 import { getReview } from "../../features/Review/ReviewSlice";
@@ -12,7 +13,7 @@ import { getCurrentUser } from "../../features/User/UserSlice";
 
 import useAuth from "../../hooks/userAuth";
 
-import LoadingScreen from "../../components/LoadingScreen";
+import CircularProgress from "@mui/material/CircularProgress";
 
 import RenderInfor from "./components/RenderInfor";
 import RenderReview from "./components/RenderReview";
@@ -45,9 +46,9 @@ function DetailPage() {
   return (
     <div id="detailPage-container">
       {isLoading ? (
-        <div id="loading-screen-custom">
-          <LoadingScreen />
-        </div>
+        <Box sx={{ display: "flex" }}>
+          <CircularProgress />
+        </Box>
       ) : error === "unknown-error" ? (
         <Stack sx={{ width: "100%" }} spacing={2}>
           <Alert severity="error">Không thể kết nối đến máy chủ!</Alert>
